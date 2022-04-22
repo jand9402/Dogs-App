@@ -1,5 +1,4 @@
 const { Router } = require('express');
-
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const axios = require('axios');
@@ -14,15 +13,25 @@ const { Dog, Temperament } = require('../db')
 //Funciones para el GET de dogs, dogs query y dogs params
 //son 3 pero solo utilizo getAllInfo que concatena las la info de la api mas la de la db
 const getApiInfo = async () => {
-    const apiUrl = await axios.get(`https://api.thedogapi.com/v1/breeds?apikey=${APIKEY}`)
+    const apiUrl = await axios.get(`https://api.thedogapi.com/v1/breeds/?apikey=${APIKEY}`)
     const apiInfo = await apiUrl.data.map(info => {
-        return {
-            id: info.id,
-            name: info.name,
-            height: info.height.metric + ' Cm',
-            weight: info.weight.metric + ' Kg',
-            life_span: info.life_span
+        let temperament = info.temperament
+        if (temperament) {{
+            temperament = temperament.split(", ");
         }
+        return {
+            image: info.image,
+            name: info.name,
+            temperament: temperament,
+            weight: info.weight.metric + ' Kg',
+        }}else{
+            return {
+                image: info.image,
+                name: info.name,
+                temperament: "empty",
+                weight: info.weight.metric + ' Kg',
+        }
+    }
     })
     return apiInfo
 }
@@ -46,9 +55,11 @@ const getAllInfo = async () => {
     return apiDb
 }
 
+//?apikey=${APIKEY}
+
 //funcion para los temperamentos
 const getAllTemperaments = async () => {
-    const apiUrl = await axios.get(`https://api.thedogapi.com/v1/breeds?apikey=${APIKEY}`)
+    const apiUrl = await axios.get(`https://api.thedogapi.com/v1/breeds/?apikey=${APIKEY}`)
     const apiInfo = await apiUrl.data.map(info => {
         return {
             temperament: info.temperament
@@ -56,9 +67,18 @@ const getAllTemperaments = async () => {
     })
     return apiInfo
 }
+// const getAllTemperaments = function(){
+//     fetch(`https://api.thedogapi.com/v1/breeds?apikey=${APIKEY}`)
+//     .then(apiInfo => apiInfo.json())
+//     .then(res => {console.log(res)})
+//     .catch(err => console.log(err))
+// }
 
 
-//rutas de dogs y dogs query
+
+
+
+//rutas de dogs y dogs+query
 router.get('/dogs', async (req, res) => {
     const nameQuery = req.query.name
     const allDogs = await getAllInfo();
@@ -73,14 +93,14 @@ router.get('/dogs', async (req, res) => {
 })
 
 //ruta de dogs params
-router.get('/dogs/:idDog', async (req, res) => {
-    const id = req.params.idDog
+router.get('/dogs/:idRaza', async (req, res) => {
+    const raza = req.params.idRaza
     const allDogs = await getAllInfo();
-    if (id) {
-        const dogId = await allDogs.filter(dog => dog.id == id)
-        dogId.length ?
-            res.status(200).json(dogId) :
-            res.status(404).send('No esta el id')
+    if (raza) {
+        const razaId = await allDogs.filter(dog => dog.name == raza)
+        razaId.length ?
+            res.status(200).json(razaId) :
+            res.status(404).send('No esta la raza')
     }
 })
 
