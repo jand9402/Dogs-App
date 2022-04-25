@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import {Link} from 'react-router-dom'
 import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import { getDogs, getTempes, tempFilter, minWeight, maxWeight } from '../../redux/actions'
+import { getDogs, getTempes, tempFilter, minWeight, maxWeight, orderName, orderWeight } from '../../redux/actions'
 import Card from '../Card/Card'
 import Paginado from '../Paginado/Paginado'
 
@@ -14,7 +14,7 @@ export default function Home(){
    
     const allDogs = useSelector((state) => state.dogs)
     const allTemps = useSelector((state) => state.temps)
-   
+    const [order, setOrder] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
     const [dogsPerPage, setDogsPerPage] = useState(8)
     const lastDog = currentPage * dogsPerPage
@@ -52,6 +52,18 @@ export default function Home(){
     function handleMax(e){
         dispatch(maxWeight(e.target.value))
     }
+    function handlerSortName(e){
+        e.preventDefault()
+        dispatch(orderName(e.target.value))
+        setCurrentPage(1)
+        setOrder(`Ordered ${e.target.value}`)
+    }
+    function handlerSortWeight(e){
+        e.preventDefault()
+        dispatch(orderWeight(e.target.value))
+        setCurrentPage(1)
+        setOrder(`Ordered ${e.target.value}`)
+    }
 
     return(
         <div>
@@ -61,13 +73,19 @@ export default function Home(){
             <h1>Doggys</h1>
             <button onClick={e => {handleClickRefresh(e)}}>Refresh</button>
             <div>
-                <span>Order</span>
-                <select>
-                    <option value='asc'>Asce</option>
-                    <option value='dsc'>Desc</option>
+                <span>Order by Name</span>
+                <select onChange={e => {handlerSortName(e)}}>
+                    <option value='asc-name'>Asce</option>
+                    <option value='dsc-name'>Desc</option>
+                </select>
+                <span>Order by Weight</span>
+                <select  onChange={e => {handlerSortWeight(e)}}>
+                    <option value='asc-weight'>Asce</option>
+                    <option value='dsc-weight'>Desc</option>
                 </select>
                 <span>Min weight</span>
                 <select onChange={e => {handleMin(e)}}>
+                    <option value='All weights'>All weights</option>
                     <option value='1 '>1 Kg</option>  
                     <option value='5'>5 Kg</option>
                     <option value='10'>10 Kg</option>
@@ -80,6 +98,7 @@ export default function Home(){
                 </select>
                 <span>Max weight</span>
                 <select onChange={e => {handleMax(e)}}>  
+                    <option value='All weights'>All weights</option>
                     <option value='5'>5 Kg</option>
                     <option value='10'>10 Kg</option>
                     <option value='15'>15 Kg</option>
@@ -112,7 +131,7 @@ export default function Home(){
                     return (
                         <Fragment>
                             <Link to={"/home/"+dog.name}>
-                            <Card name={dog.name} image={dog.image.url} temperament={dog.temperament} weight={dog.weight} />
+                            <Card name={dog.name} image={dog.image.url} temperament={dog.temperament} minWeight={dog.minWeight} maxWeight={dog.maxWeight} />
                             </Link>
                         </Fragment>
                     )

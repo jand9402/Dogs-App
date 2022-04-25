@@ -16,6 +16,19 @@ const getApiInfo = async () => {
     const apiUrl = await axios.get(`https://api.thedogapi.com/v1/breeds/?apikey=${APIKEY}`)
     const apiInfo = await apiUrl.data.map(info => {
         let temperament = info.temperament
+        
+
+        let weight = info.weight.metric
+        if(weight){
+            weight = weight.split(" - ")
+        }else{
+            weight = ["Empty"]
+        }
+        let minWeight = weight[0]
+        let maxWeight = weight[1]
+
+
+
         if (temperament) {{
             temperament = temperament.split(", ");
         }
@@ -23,13 +36,15 @@ const getApiInfo = async () => {
             image: info.image,
             name: info.name,
             temperament: temperament,
-            weight: info.weight.metric + ' Kg',
+            minWeight: minWeight,
+            maxWeight: maxWeight
         }}else{
             return {
                 image: info.image,
                 name: info.name,
-                temperament: "empty",
-                weight: info.weight.metric + ' Kg',
+                temperament: "#",
+                minWeight: minWeight,
+                maxWeight: maxWeight
         }
     }
     })
@@ -149,7 +164,8 @@ router.post('/dog', async (req, res) => {
     let {
         name,
         height,
-        weight,
+        minWeight,
+        maxWeight,
         life_span,
         temperament
     } = req.body
@@ -157,7 +173,8 @@ router.post('/dog', async (req, res) => {
    let newDog = await Dog.create({
         name,
         height,
-        weight,
+        minWeight,
+        maxWeight,
         life_span,
     })
 
