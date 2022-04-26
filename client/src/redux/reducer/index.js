@@ -5,7 +5,8 @@ import { GET_DOGS,
          MIN_WEIGHT, 
          MAX_WEIGHT,
          ORDER_NAME, 
-         ORDER_WEIGHT
+         ORDER_WEIGHT,
+         POST_DOG
         } from "../actions";
 
 
@@ -44,7 +45,7 @@ const rootReducer = (state = initialState, action) => {
         case FILTER_BY_TEMP:
             const allDogs = state.dogsAll
             const temp = action.payload
-            const dogFilter = temp === '-' ? allDogs : allDogs.filter((dog) => dog.temperament.includes(temp))
+            const dogFilter = temp === 'All temperaments' ? allDogs : allDogs.filter((dog) => dog.temperament.includes(temp))
            return{
                ...state, 
                dogs: dogFilter
@@ -108,6 +109,10 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 dogs: sortWeight
             }
+            case POST_DOG:
+                return{
+                    ...state,
+                }
             default: return{...state}
        
     };

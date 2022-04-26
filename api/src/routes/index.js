@@ -33,14 +33,14 @@ const getApiInfo = async () => {
             temperament = temperament.split(", ");
         }
         return {
-            image: info.image,
+            image: info.image.url,
             name: info.name,
             temperament: temperament,
             minWeight: minWeight,
             maxWeight: maxWeight
         }}else{
             return {
-                image: info.image,
+                image: info.image.url,
                 name: info.name,
                 temperament: "#",
                 minWeight: minWeight,
@@ -162,6 +162,7 @@ router.get('/temperament', async (req, res) => {
 
 router.post('/dog', async (req, res) => {
     let {
+        image,
         name,
         height,
         minWeight,
@@ -171,6 +172,7 @@ router.post('/dog', async (req, res) => {
     } = req.body
 
    let newDog = await Dog.create({
+        image,
         name,
         height,
         minWeight,

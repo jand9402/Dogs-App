@@ -2,16 +2,22 @@ import React, { Fragment } from 'react'
 import {Link} from 'react-router-dom'
 import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import { getDogs, getTempes, tempFilter, minWeight, maxWeight, orderName, orderWeight } from '../../redux/actions'
+import { getDogs, 
+         getTempes, 
+         tempFilter, 
+         minWeight, 
+         maxWeight, 
+         orderName, 
+         orderWeight } from '../../redux/actions'
 import Card from '../Card/Card'
 import Paginado from '../Paginado/Paginado'
+import SerachBar from '../Nav/Nav'
 
 
 export default function Home(){
 
     
     const dispatch = useDispatch()
-   
     const allDogs = useSelector((state) => state.dogs)
     const allTemps = useSelector((state) => state.temps)
     const [order, setOrder] = useState('')
@@ -73,6 +79,7 @@ export default function Home(){
             <h1>Doggys</h1>
             <button onClick={e => {handleClickRefresh(e)}}>Refresh</button>
             <div>
+                <SerachBar/>
                 <span>Order by Name</span>
                 <select onChange={e => {handlerSortName(e)}}>
                     <option value='asc-name'>Asce</option>
@@ -127,11 +134,12 @@ export default function Home(){
                 allDogs={allDogs.length}
                 paginado={paginado}
                 />
-                {currentDogs?.map((dog) => {
+                {allDogs?.map((dog) => {
+                    console.log(dog)
                     return (
                         <Fragment>
                             <Link to={"/home/"+dog.name}>
-                            <Card name={dog.name} image={dog.image.url} temperament={dog.temperament} minWeight={dog.minWeight} maxWeight={dog.maxWeight} />
+                            <Card name={dog.name} image={dog.image ? dog.image : 'https://th.bing.com/th/id/OIP.Bx3vNW9VjpIN8e7rbSP6twHaEV?pid=ImgDet&rs=1'} temperament={dog.temperament ? dog.temperament : dog.temperaments} minWeight={dog.minWeight} maxWeight={dog.maxWeight} />
                             </Link>
                         </Fragment>
                     )

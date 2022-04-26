@@ -1,7 +1,7 @@
 import React from "react";
 
-export default function Card({image, name, temperament, minWeight, maxWeight}){
-    let temperamentos = temperament
+export default function Card({id, image, name, temperament, temperaments, minWeight, maxWeight}){
+    let temperamentos = temperament ? temperament : temperaments
     let newArray = []
     for(let i = 0; i < temperamentos.length; i++){
         if(temperamentos[0] === '#'){
