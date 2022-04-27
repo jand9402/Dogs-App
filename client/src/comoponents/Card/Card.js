@@ -1,7 +1,13 @@
 import React from "react";
 
-export default function Card({id, image, name, temperament, temperaments, minWeight, maxWeight}){
-    let temperamentos = temperament ? temperament : temperaments
+export default function Card({id, image, name, temperament, minWeight, maxWeight}){
+    // let tempsFromDb = []
+    // if(temperaments){
+    //     temperament.map(temp => {
+    //         tempsFromDb.push(temp.temperament)
+    //     })
+    // }
+    let temperamentos = temperament 
     let newArray = []
     for(let i = 0; i < temperamentos.length; i++){
         if(temperamentos[0] === '#'){

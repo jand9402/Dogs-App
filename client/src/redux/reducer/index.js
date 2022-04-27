@@ -6,7 +6,9 @@ import { GET_DOGS,
          MAX_WEIGHT,
          ORDER_NAME, 
          ORDER_WEIGHT,
-         POST_DOG
+         POST_DOG,
+         GET_DETAIL,
+         CREATED
         } from "../actions";
 
 
@@ -17,7 +19,8 @@ const initialState = {
     dogsAll4: [],
     dogsAll5: [],
     dogs: [],
-    temps: []
+    temps: [],
+    detail: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -71,6 +74,22 @@ const rootReducer = (state = initialState, action) => {
                 ...state, 
                 dogs: maxWeightFilter
             }
+            case CREATED:
+            const allDogs4 = state.dogsAll
+            const created = action.payload
+            if(created === 'ALL'){
+                return{
+                    ...state, 
+                    dogs: allDogs4
+                }
+            }
+            else{
+            const whereCreated = created === 'API' ? allDogs4.filter((dog) => !dog.created):allDogs4.filter((dog) => dog.created)
+            return{
+                ...state, 
+                dogs: whereCreated
+            }
+        }
             case ORDER_NAME:
                 let nameSort = state.dogsAll2
                 let sortName = action.payload === 'asc-name' ?
@@ -112,6 +131,12 @@ const rootReducer = (state = initialState, action) => {
             case POST_DOG:
                 return{
                     ...state,
+                    //dogs: [...state.dogs, action.payload]
+                }
+            case GET_DETAIL:
+                return{
+                    ...state,
+                    detail: action.payload
                 }
             default: return{...state}
        

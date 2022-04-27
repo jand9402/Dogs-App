@@ -6,7 +6,9 @@ export const MAX_WEIGHT = 'MAX_WEIGHT'
 export const ORDER_NAME = 'ORDER_NAME'
 export const ORDER_WEIGHT = 'ORDER_WEIGHT'
 export const GET_DOG = 'GET_DOG'
-export const POST_DOG = 'POST_DOG'
+export const POST_DOG = 'POST_DOG' 
+export const GET_DETAIL = 'GET_DETAIL' 
+export const CREATED = 'CREATED'
 const axios = require('axios');
 
 // export function getDog(name){
@@ -41,7 +43,6 @@ export const getTempes = () => (dispatch) => {
 export function postDog (payload){
     return async function (dispatch){
         const response = await axios.post("http://localhost:3001/dog",payload)
-        console.log(response)
         return response
     }
 }
@@ -67,6 +68,13 @@ export function maxWeight(value){
     }
 }
 
+export function created(value){
+    return{
+        type: CREATED,
+        payload: value
+    }
+}
+
 export function orderName(value){
     return{
         type: ORDER_NAME,
@@ -79,4 +87,19 @@ export function orderWeight(value){
         type: ORDER_WEIGHT,
         payload: value
     }
+}
+
+export function getDetail(id){
+    return async function (dispatch){
+        return fetch("http://localhost:3001/dogs/" + id)
+    .then((response) => response.json())
+    .then((json) => {dispatch({ type: GET_DETAIL, payload:json})})
+};
+    //     const response = await axios.get("http://localhost:3001/dogs/" + id)
+    //     return dispatch({
+    //         type: GET_DETAIL,
+    //         payload: response.data
+    //     })
+    // }
+
 }

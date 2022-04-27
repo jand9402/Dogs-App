@@ -17,6 +17,14 @@ const getApiInfo = async () => {
     const apiInfo = await apiUrl.data.map(info => {
         let temperament = info.temperament
         
+        let height = info.height.metric
+        if(height){
+            height = height.split(" - ")
+        }else{
+            height = ["Empty"]
+        }
+        let minheight= height[0]
+        let maxheight = height[1]
 
         let weight = info.weight.metric
         if(weight){
@@ -33,18 +41,28 @@ const getApiInfo = async () => {
             temperament = temperament.split(", ");
         }
         return {
+            id: info.id,
             image: info.image.url,
             name: info.name,
             temperament: temperament,
             minWeight: minWeight,
-            maxWeight: maxWeight
+            maxWeight: maxWeight,
+            minheight: minheight,
+            maxheight: maxheight,
+            life_span: info.life_span
+
+
         }}else{
             return {
+                id: info.id,
                 image: info.image.url,
                 name: info.name,
                 temperament: "#",
                 minWeight: minWeight,
-                maxWeight: maxWeight
+                maxWeight: maxWeight,
+                minheight: minheight,
+                maxheight: maxheight,
+                life_span: info.life_span
         }
     }
     })
@@ -68,6 +86,7 @@ const getAllInfo = async () => {
     const db = await getDbInfo();
     const apiDb = api.concat(db);
     return apiDb
+   // return api
 }
 
 //?apikey=${APIKEY}
@@ -78,7 +97,7 @@ const getAllTemperaments = async () => {
     const apiInfo = await apiUrl.data.map(info => {
         return {
             temperament: info.temperament
-        }
+    }
     })
     return apiInfo
 }
@@ -112,7 +131,7 @@ router.get('/dogs/:idRaza', async (req, res) => {
     const raza = req.params.idRaza
     const allDogs = await getAllInfo();
     if (raza) {
-        const razaId = await allDogs.filter(dog => dog.name == raza)
+        const razaId = await allDogs.filter(dog => dog.id == raza)
         razaId.length ?
             res.status(200).json(razaId) :
             res.status(404).send('No esta la raza')
@@ -171,20 +190,26 @@ router.post('/dog', async (req, res) => {
         temperament
     } = req.body
 
-   let newDog = await Dog.create({
+    let newDog = await Dog.create({
         image,
         name,
         height,
         minWeight,
         maxWeight,
-        life_span,
+        life_span, 
     })
+    
+    // let temperamentDb = await Temperament.findAll({
+    //     where: { temperament: temperament }
+    // })
 
+    // // // let arrayTemps = []
 
-    let temperamentDb = await Temperament.findAll({
-        where: { temperament: temperament }
-    })
-    newDog.addTemperament(temperamentDb)
+    // // // await temperamentDb.map((temp) => {
+    // // //     arrayTemps.push(temp.temperament)
+    // // // })
+    
+    // newDog.addTemperament(temperamentDb)
     res.send('todo ok')
 });
 

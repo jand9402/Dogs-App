@@ -3,11 +3,31 @@ import { Link, useHistory } from "react-router-dom";
 import { postDog, getTempes } from '../../redux/actions/index'
 import { useDispatch, useSelector } from "react-redux";
 
+function validate(input){
+    let errors = {}
+    if(!input.name){
+        errors.name = "Name is required"
+    }
+    else if(!input.height){
+        errors.height = "Height is required"
+    }
+    else if(!input.minWeight){
+        errors.minWeight = "Min weight is required"
+    }
+    else if(!input.maxWeight){
+        errors.maxWeight = "Max weight is required"
+    }
+    else if(!input.temperament[0]){
+        errors.temperament = "At least two temperament are requiered"
+    }
+    return errors
+}
 
 export default function DogCreate(){
     const dispatch = useDispatch()
     const history = useHistory()
     const allTemps = useSelector((state) => state.temps)
+    const [errors, setErrors] = useState({})
 
     const [input, setInput] = useState({
         name:"",
@@ -24,6 +44,10 @@ export default function DogCreate(){
             ...input,
             [e.target.name]: e.target.value
         })
+        setErrors(validate({
+            ...input,
+            [e.target.name]: e.target.value
+        }))
     }
 
     // function handleCheck(e){
@@ -40,9 +64,24 @@ export default function DogCreate(){
             ...input,
             temperament: [...input.temperament, e.target.value]
         })
+        setErrors(validate({
+            ...input,
+            [e.target.name]: e.target.value
+        }))
+    }
+    function handleDelete(temp){
+        setInput({
+            ...input,
+            temperament: input.temperament.filter(temper => temper !== temp)
+        })
     }
 
+
     function handleSubmit(e){
+        if(errors.name || errors.height || errors.minWeight || errors.maxWeight || errors.temperament){
+            alert('Must complete all required fields')
+        }
+         else{
         e.preventDefault()
         console.log(input)
         dispatch(postDog(input))
@@ -57,8 +96,11 @@ export default function DogCreate(){
             temperament:[]
         })
         history.push('/home')
+            
+        }
     }
 
+   
     
 
     useEffect(() => {
@@ -73,24 +115,36 @@ export default function DogCreate(){
             <h1>Cereate new dog</h1>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <div>
-                    <label>Name</label>
+                    <label>Name* </label>
                     <input onChange={(e) => handleChange(e)} type="text" value={input.name} name="name"/>
+                    {errors.name && (
+                        <p>{errors.name}</p>
+                    )}
                 </div>
                 <div>
                     <label>Image</label>
                     <input onChange={(e) => handleChange(e)} type="text" value={input.image} name="image"/>
                 </div>
                 <div>
-                    <label>Height</label>
+                    <label>Height* </label>
                     <input onChange={(e) => handleChange(e)} type="text" value={input.height} name="height"/>
+                    {errors.height && (
+                        <p>{errors.height}</p>
+                    )}
                 </div>
                 <div>
-                    <label>Min weight</label>
+                    <label>Min weight* </label>
                     <input onChange={(e) => handleChange(e)} type="text" value={input.minWeight} name="minWeight"/>
+                    {errors.minWeight && (
+                        <p>{errors.minWeight}</p>
+                    )}
                 </div>
                 <div>
-                    <label>Man weight</label>
+                    <label>Man weight* </label>
                     <input onChange={(e) => handleChange(e)} type="text" value={input.maxWeight} name="maxWeight"/>
+                    {errors.maxWeight && (
+                        <p>{errors.maxWeight}</p>
+                    )}
                 </div>
                 <div>
                     <label>Life span</label>
@@ -109,7 +163,7 @@ export default function DogCreate(){
                     )}
                 )  
                 }                    */}
-                <label>Temperaments</label>
+                <label>Temperaments* </label>
                 <select onChange={(e) => handleSelect(e)}>
                     {allTemps?.map((temp) => { 
                     return (
@@ -120,10 +174,21 @@ export default function DogCreate(){
                 )  
                 } 
                 </select>
-                <ul><li>{input.temperament.map(temp =>  temp + "- ")}</li></ul>
+                
+                
+                {/* <ul><li>{input.temperament.map(temp =>  temp + "- ")}</li></ul> */}
+                {errors.temperament && (
+                        <p>{errors.temperament}</p>
+                    )}
                 </div>
-                <button>Create Dog</button>
+                <button >Create Dog</button>
             </form>
+            <h3>Temperaments selected</h3>
+            {input.temperament.map(temp => 
+                    <div>
+                        <p>{temp}</p>
+                        <button onClick={() => handleDelete(temp)}>Delete</button>
+                    </div>)}
         </div>
     )
     
