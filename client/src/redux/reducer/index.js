@@ -20,7 +20,7 @@ const initialState = {
     dogsAll5: [],
     dogs: [],
     temps: [],
-    detail: []
+    detail: null
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -41,6 +41,9 @@ const rootReducer = (state = initialState, action) => {
                 dogs: action.payload,
             }
         case GET_TEMPS:
+            // let temper = action.payload
+            // let arrayTemperaments = []
+            // let tempera = temper.map(tem => {arrayTemperaments.push(tem.temperament)} )
             return{
                 ...state,
                 temps: action.payload

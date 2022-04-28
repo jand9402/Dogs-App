@@ -1,4 +1,5 @@
 import React from "react";
+import "./styles-card.css";
 
 export default function Card({id, image, name, temperament, minWeight, maxWeight}){
     // let tempsFromDb = []
@@ -17,16 +18,18 @@ export default function Card({id, image, name, temperament, minWeight, maxWeight
         newArray.push(temp)}
     }
     return(
-        <div>
-            <img src={image} alt="dog img" width="200px" height="250px"/>
-            <h2>{name}</h2>
-            <h3>{minWeight} - {maxWeight} Kg</h3>
-            <h3>{newArray?.map((temp) => { 
+        <div class="div-card">
+            <div class="otro-div">
+            <h2 class="name">{name}</h2>
+            <img class="img-card" src={image} alt="dog img"/>
+            <h3 class="weight">Weight: {minWeight} - {maxWeight} Kg</h3>
+            <h3 class="temperaments">Temperaments: {newArray?.map((temp) => { 
                     return (
-                        <p>{temp}</p>
+                        <h4>{temp}</h4>
                     )}
                 )  
                 }</h3>
+            </div>
         </div>
     )
 }

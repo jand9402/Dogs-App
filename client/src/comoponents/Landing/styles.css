@@ -1,0 +1,56 @@
+.container{
+    position: fixed;
+    border-radius: 10px;
+    border: solid 5px white;
+    height: 550px;
+    width: 900px;
+    margin-left: 230px;
+    margin-top: 30px;
+}
+
+.div-home{
+    height: 2800px;
+    background-image: radial-gradient(circle at 7% 65.65%, #ff43ff 0, #ff41fa 12.5%, #e53eec 25%, #b337d8 37.5%, #7f2dbd 50%, #4b22a0 62.5%, #071985 75%, #00126d 87.5%, #000358 100%);
+}
+
+.div{
+    height: 1000px;
+    background: rgb(2,0,36);
+    background: radial-gradient(circle, rgba(2,0,36,1) 0%, #7f2dbd 100%, rgba(0,212,255,1) 100%);
+}
+
+.title{
+    color: white;
+    position: fixed;
+    margin-top: 400px;
+    margin-left: 470px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 90px;
+}
+
+.btn{
+    position: fixed;
+    margin-top: 500px;
+    margin-left: -90px;
+    height: 50px;
+    width: 200px;
+    font-size: 30px;
+    color: black;
+    background-color: rgb(255, 179, 48);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;   
+    transition: 300ms all;
+    border: none;
+}
+
+.btn:hover {
+    background-color: #6b6864;
+    color: white;
+  }
+
+.img{
+    position: fixed;
+    height: 350px;
+    margin-left: -160px;
+    margin-top: 60px;
+}
+

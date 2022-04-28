@@ -90,16 +90,16 @@ export function orderWeight(value){
 }
 
 export function getDetail(id){
-    return async function (dispatch){
-        return fetch("http://localhost:3001/dogs/" + id)
-    .then((response) => response.json())
-    .then((json) => {dispatch({ type: GET_DETAIL, payload:json})})
-};
-    //     const response = await axios.get("http://localhost:3001/dogs/" + id)
-    //     return dispatch({
-    //         type: GET_DETAIL,
-    //         payload: response.data
-    //     })
-    // }
-
+     return async function (dispatch){
+//         return fetch("http://localhost:3001/dogs/" + id)
+//     .then((response) => response.json())
+//     .then((json) => {dispatch({ type: GET_DETAIL, payload:json})})
+    
+// };
+        const response = await axios.get("http://localhost:3001/dogs/" + id)
+        return dispatch({
+            type: GET_DETAIL,
+            payload: response.data
+        })
+    }
 }

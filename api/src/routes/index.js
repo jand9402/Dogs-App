@@ -107,6 +107,12 @@ const getAllTemperaments = async () => {
 //     .then(res => {console.log(res)})
 //     .catch(err => console.log(err))
 // }
+// const tempsFromDb = async () => {
+//     return await Temperament.findAll({
+//         attributes: ["id", "temperament"],
+//         raw: true
+//     })
+// }
 
 
 
@@ -202,9 +208,20 @@ router.post('/dog', async (req, res) => {
     // let temperamentDb = await Temperament.findAll({
     //     where: { temperament: temperament }
     // })
+    //let tempsDb = await tempsFromDb() 
+    
+    
+
+    // tempsDb = tempsDb.filter(temp => {
+    //     for(let i = 0; i < temperament.length; i++){
+    //         if(temp === temperament[i]) return true
+    //     }
+    // })
 
     // // // let arrayTemps = []
-
+    // let temperamentDb = await Temperament.findAll({
+    //     where: {temperament: temperament}
+    // })
     // // // await temperamentDb.map((temp) => {
     // // //     arrayTemps.push(temp.temperament)
     // // // })

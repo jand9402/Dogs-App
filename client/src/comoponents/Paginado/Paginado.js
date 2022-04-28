@@ -1,4 +1,6 @@
 import React from "react";
+import "./styles-paginado.css";
+
 
 export default function Paginado ({dogsPerPage, allDogs, paginado}){
     const pageNumbers = []
@@ -8,13 +10,13 @@ export default function Paginado ({dogsPerPage, allDogs, paginado}){
     }
 
     return(
-        <nav>
+        <nav id="menu">
             <ul className="paginado">
                 {
                     pageNumbers &&
                         pageNumbers.map(page => (
-                            <li className="numero" key={page}>
-                            <button onClick={() => paginado(page)}>{page}</button>
+                            <li key={page}>
+                            <button class="nav-btn" onClick={() => paginado(page)}>{page}</button>
                             </li>
                         ))    
                 }

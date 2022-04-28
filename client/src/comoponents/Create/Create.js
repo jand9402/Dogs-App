@@ -2,6 +2,7 @@ import React, { useState, useEffect} from "react";
 import { Link, useHistory } from "react-router-dom";
 import { postDog, getTempes } from '../../redux/actions/index'
 import { useDispatch, useSelector } from "react-redux";
+import "./styles-create.css";
 
 function validate(input){
     let errors = {}
@@ -108,47 +109,48 @@ export default function DogCreate(){
     },[dispatch])
 
     return(
-        <div>
+        <div class="div-create">
+            <div class="div-form-created">
             <Link to='/home'>
-            <button>Home</button>
+            <button class="btn-home-create">Home</button>
             </Link>
-            <h1>Cereate new dog</h1>
+            <h1 class="create-title">Create new dog</h1>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <div>
-                    <label>Name* </label>
-                    <input onChange={(e) => handleChange(e)} type="text" value={input.name} name="name"/>
+                    <label class="label">Name* </label>
+                    <input class="input-text" onChange={(e) => handleChange(e)} type="text" value={input.name} name="name"/>
                     {errors.name && (
-                        <p>{errors.name}</p>
+                        <p class="erros-name">{errors.name}</p>
                     )}
                 </div>
                 <div>
-                    <label>Image</label>
-                    <input onChange={(e) => handleChange(e)} type="text" value={input.image} name="image"/>
+                    <label class="label">Image</label>
+                    <input class="input-text"  onChange={(e) => handleChange(e)} type="text" value={input.image} name="image"/>
                 </div>
                 <div>
-                    <label>Height* </label>
-                    <input onChange={(e) => handleChange(e)} type="text" value={input.height} name="height"/>
+                    <label class="label">Height* </label>
+                    <input class="input-text"  onChange={(e) => handleChange(e)} type="text" value={input.height} name="height"/>
                     {errors.height && (
-                        <p>{errors.height}</p>
+                        <p class="erros-height">{errors.height}</p>
                     )}
                 </div>
                 <div>
-                    <label>Min weight* </label>
-                    <input onChange={(e) => handleChange(e)} type="text" value={input.minWeight} name="minWeight"/>
+                    <label class="label">Min weight* </label>
+                    <input class="input-text"  onChange={(e) => handleChange(e)} type="text" value={input.minWeight} name="minWeight"/>
                     {errors.minWeight && (
-                        <p>{errors.minWeight}</p>
+                        <p class="erros-min-weight">{errors.minWeight}</p>
                     )}
                 </div>
                 <div>
-                    <label>Man weight* </label>
-                    <input onChange={(e) => handleChange(e)} type="text" value={input.maxWeight} name="maxWeight"/>
+                    <label class="label">Max weight* </label>
+                    <input class="input-text"  onChange={(e) => handleChange(e)} type="text" value={input.maxWeight} name="maxWeight"/>
                     {errors.maxWeight && (
-                        <p>{errors.maxWeight}</p>
+                        <p class="erros-max-weight">{errors.maxWeight}</p>
                     )}
                 </div>
                 <div>
-                    <label>Life span</label>
-                    <input onChange={(e) => handleChange(e)} type="text" value={input.life_span} name="life_span"/>
+                    <label class="label">Life span</label>
+                    <input class="input-text"  onChange={(e) => handleChange(e)} type="text" value={input.life_span} name="life_span"/>
                 </div>
                 <div>
                 {/* <label>Temperaments</label>
@@ -163,11 +165,11 @@ export default function DogCreate(){
                     )}
                 )  
                 }                    */}
-                <label>Temperaments* </label>
-                <select onChange={(e) => handleSelect(e)}>
+                <label class="label">Temperaments* </label>
+                <select class="input-text"  onChange={(e) => handleSelect(e)}>
                     {allTemps?.map((temp) => { 
                     return (
-                        <option value={temp.temperament}>
+                        <option key={temp.temperament} value={temp.temperament}>
                             {temp.temperament}
                         </option>
                     )}
@@ -178,17 +180,18 @@ export default function DogCreate(){
                 
                 {/* <ul><li>{input.temperament.map(temp =>  temp + "- ")}</li></ul> */}
                 {errors.temperament && (
-                        <p>{errors.temperament}</p>
+                        <p class="erros-temperaments">{errors.temperament}</p>
                     )}
                 </div>
-                <button >Create Dog</button>
+                <button class="btn-create-dog">Create Dog</button>
             </form>
-            <h3>Temperaments selected</h3>
+            <h3 class="temps-selecte">Temperaments selected</h3>
             {input.temperament.map(temp => 
                     <div>
-                        <p>{temp}</p>
-                        <button onClick={() => handleDelete(temp)}>Delete</button>
+                        <p class="temperamet">{temp}</p>
+                        <button class="button-delete" onClick={() => handleDelete(temp)}>Delete</button>
                     </div>)}
+                    </div>
         </div>
     )
     
