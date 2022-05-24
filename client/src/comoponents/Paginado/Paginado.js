@@ -10,8 +10,11 @@ export default function Paginado ({dogsPerPage, allDogs, paginado}){
     }
 
     return(
-        <nav id="menu">
-            <ul className="paginado">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-auto">
+        <nav id="menu">  
+            <ul>
                 {
                     pageNumbers &&
                         pageNumbers.map(page => (
@@ -21,6 +24,11 @@ export default function Paginado ({dogsPerPage, allDogs, paginado}){
                         ))    
                 }
             </ul>
+            
+            
         </nav>
+        </div>
+        </div>
+        </div>
     )
 }

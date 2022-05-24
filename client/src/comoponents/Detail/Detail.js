@@ -47,6 +47,48 @@ export default function Detail(){
     //     newArray.push(temp)}
     //     }
     return(
+
+
+
+    //     <div class="card" >
+    //         <Link class="link-card" to={'/detail/' + id}>
+    //             <img class="img-card" src={image} alt="dog img" />
+    //         </Link>
+    //         <div class="card-body">
+    //             <h2 class="card-title">{name}</h2>
+    //             <h3 class="card-weight">Weight: {minWeight} - {maxWeight} Kg</h3>
+    //             <div class="container">
+    //             <div class="row justify-content-center">
+    //             <div class="col-auto">
+    //                 <div class="dropdown">
+    //                     <button class="btn-card-temps btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    //                         Temperaments
+    //                     </button>
+
+    //                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    //                         {newArray?.map((temp) => {
+    //                             return (
+    //                                 <li>
+    //                                     {temp}
+    //                                 </li>
+    //                             )
+    //                         }
+    //                         )
+    //                         }
+    //                     </ul>
+    //                 </div>
+    //             </div>
+    //             </div>
+    //             </div>
+            
+            
+            
+    //         </div>
+    //     </div>
+    // )
+
+
+
         <div class="father-div">
         <div class="div-detail">
             <Link to='/home'>
@@ -73,12 +115,6 @@ export default function Detail(){
                 )  : <div class="temps-detail">Empty</div>
                 }
                 </div>
-                    {/* <h3>{newArray?.map((temp) => { 
-                    return (
-                        <p>{temp}</p>
-                    )}
-                )  
-                }</h3> */}
                 </div>:<p class="loading">Loading</p>
             }
         </div>

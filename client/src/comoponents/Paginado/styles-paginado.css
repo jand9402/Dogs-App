@@ -1,14 +1,10 @@
-#menu{
-    width: 100%;
-    font-size: 18px;
-}
+
 
 #menu ul li{
     display: inline-block;
     list-style: none;
-    /* height: 46px;
-    margin-left: 10px;
-    margin-right: 15px; */
+    height: 46px;
+    margin-top: 30px;  
 }
 
 .nav-btn{

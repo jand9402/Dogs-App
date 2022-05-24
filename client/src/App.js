@@ -8,7 +8,7 @@ import Detail from './comoponents/Detail/Detail'
 function App() {
   return (
     <BrowserRouter>
-       <div className="App">
+       <div>
          <Switch>
            <Route exact path= '/' component={Landing}/>
            <Route exact path= '/home' component={Home}/>

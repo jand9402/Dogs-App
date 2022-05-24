@@ -8,7 +8,8 @@ export const ORDER_WEIGHT = 'ORDER_WEIGHT'
 export const GET_DOG = 'GET_DOG'
 export const POST_DOG = 'POST_DOG' 
 export const GET_DETAIL = 'GET_DETAIL' 
-export const CREATED = 'CREATED'
+export const CREATED = 'CREATED' 
+
 const axios = require('axios');
 
 // export function getDog(name){

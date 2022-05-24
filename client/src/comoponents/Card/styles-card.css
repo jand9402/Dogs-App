@@ -1,4 +1,4 @@
-
+/* 
 
 .otro-div{
     position: relative;
@@ -31,6 +31,52 @@
     font-size: 6px;
     color: white;
     margin-bottom: 3px;
+}
+
+ */
+
+ .card{
+    border-radius: 20px;
+    height: 330px;
+    width: 300px;
+    margin-bottom: 20px;
+    background-color: black;
+    
+}
+
+ .img-card{
+    max-height: 150px;
+    width: 100%;
+     border-top-left-radius: 20px;
+     border-top-right-radius: 20px;
+ }
+
+ .card-title{
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.card-weight{
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.card-temperaments{
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin-top: 20px;
+}
+
+.link-card{
+    text-decoration: none;
+    width: 100%;
+}
+
+.form-select{
+    margin-bottom: 0px;
 }
 
 

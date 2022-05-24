@@ -52,6 +52,7 @@ const rootReducer = (state = initialState, action) => {
             const allDogs = state.dogsAll
             const temp = action.payload
             const dogFilter = temp === 'All temperaments' ? allDogs : allDogs.filter((dog) => dog.temperament.includes(temp))
+                
            return{
                ...state, 
                dogs: dogFilter
@@ -59,7 +60,7 @@ const rootReducer = (state = initialState, action) => {
            case MIN_WEIGHT:
             const allDogs2 = state.dogsAll
             const weightmin = action.payload
-             const minWeightFilter = weightmin === 'All weights' ? allDogs2 : allDogs2.filter((dog) => {
+            const minWeightFilter = weightmin === 'All weights' ? allDogs2 : allDogs2.filter((dog) => {
                 if(Number(dog.minWeight) >= Number(action.payload)) return true})
             
             return{

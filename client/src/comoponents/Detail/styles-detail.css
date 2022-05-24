@@ -1,4 +1,4 @@
-.button-home-detail{
+/* .button-home-detail{
     position: fixed;
     margin-left: -54px;
     height: 30px;
@@ -99,4 +99,15 @@
 
 .loading{
 
+} */
+
+.button-home-detail{
+    background-color: #FDB927;
+    color: black;
+    font-size: 25px;
+    font-weight: bold;
+    transition: 300ms all;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 40px;
 }
